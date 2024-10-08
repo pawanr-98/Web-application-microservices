@@ -41,9 +41,7 @@ pipeline {
                     echo "Deploying ${jarFile}"
 
                     // Use PowerShell to run the Java command with the .jar file path
-                    powershell(script: """
-                        Start-process -FilePath 'java' -ArgumentList '-jar', '${jarFile}'
-                    """)
+                    powershell(script: "java -jar \"${jarFile}\"")
                 }
             }
         }
