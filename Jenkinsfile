@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the microservice directory and find the .jar file dynamically
-                    def jarFile = bat(script: 'for /f "tokens=*" %%i in (\'dir /B "backend with eclipse\\catalogue-service\\target\\*.jar"\') do echo %%i', returnStdout: true).trim()
+                    def jarFile = bat(script: 'for /f "delims=*" %%i in (\'dir /B "backend with eclipse\\catalogue-service\\target\\*.jar"\') do @echo %%i', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
 
