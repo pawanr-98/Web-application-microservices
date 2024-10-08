@@ -38,7 +38,7 @@ pipeline {
                     echo "Deploying ${jarFile}"
 
                     // Run the Java command to start the .jar file
-                    bat "java -jar \"backend with eclipse\\catalogue-service\\target\\${jarFile}\""
+                    powershell(script: "java -jar \"backend with eclipse\\catalogue-service\\target\\${jarFile}\"")
                 }
             }
         }
