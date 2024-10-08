@@ -18,7 +18,7 @@ pipeline {
                 git branch: "${env.BRANCH_NAME}", url: 'https://github.com/pawanr-98/Web-application-microservices.git'
             }
         }
-       stage('Build catalogue-service') {
+        stage('Build catalogue-service') {
             steps {
                 dir('backend with eclipse/catalogue-service') {
                 echo 'Building catalogue-service'
@@ -32,13 +32,16 @@ pipeline {
             }
             steps {
                 script {
-                    // Navigate to the microservice directory and find the .jar file dynamically
-                    def jarFile = bat(script: 'powershell -Command "Get-ChildItem -Path \'backend with eclipse\\catalogue-service\\target\\\' -Filter \'*.jar\' | Select-Object -ExpandProperty Name "', returnStdout: true).trim()
+                     // Use PowerShell to find the .jar file and store it in a variable
+                    def jarFile = powershell(script: '''
+                        $jar = Get-ChildItem -Path "backend with eclipse\\catalogue-service\\target\\" -Filter "*.jar" | Select-Object -ExpandProperty FullName
+                        Write-Output $jar
+                    ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
 
-                    // Run the Java command to start the .jar file
-                    powershell(script: "java -jar \"backend with eclipse\\catalogue-service\\target\\${jarFile}\"")
+                    // Use PowerShell to run the Java command with the .jar file path
+                    powershell(script: "java -jar \"${jarFile}\"")
                 }
             }
         }
