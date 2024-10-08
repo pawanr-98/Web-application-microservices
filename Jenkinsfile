@@ -19,9 +19,6 @@ pipeline {
             }
         }
        stage('Build catalogue-service') {
-            when {
-                changeset "backend with eclipse/catalogue-service/**"
-            }
             steps {
                 dir('backend with eclipse/catalogue-service') {
                 echo 'Building catalogue-service'
