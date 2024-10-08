@@ -23,8 +23,10 @@ pipeline {
                 changeset "backend with eclipse/catalogue-service/**"
             }
             steps {
+                dir('backend with eclipse/catalogue-service') {
                 echo 'Building catalogue-service'
                 bat 'mvn clean package'
+                }    
             }
         }
         stage('Deploy catalogue-service') {
