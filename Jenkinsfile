@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the microservice directory and find the .jar file dynamically
-                    def jarFile = bat(script: 'powershell -Command "Get-ChildItem -Path \'backend with eclipse\\catalogue-service\\target\\\' -Filter \'*.jar\' | ForEach-Object { $_.Name }"', returnStdout: true).trim()
+                    def jarFile = bat(script: 'powershell -Command "Get-ChildItem -Path \'backend with eclipse\\catalogue-service\\target\\\' -Filter \'*.jar\' | Select-Object -ExpandProperty Name "', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
 
