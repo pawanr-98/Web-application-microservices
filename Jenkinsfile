@@ -39,12 +39,17 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    echo "Jar file path: ${jarFile}"
+                    
+                    // Create a .bat file dynamically to run the .jar file
+                    writeFile file: 'run_catalogue_service.bat', text: """
+                        @echo off
+                        set JAR_PATH="${jarFile}"
+                        start java -jar %JAR_PATH%
+                        exit
+                    """
 
-                    // Use PowerShell to run the Java command with the .jar file path
-                    powershell(script: """
-                       Start-Process -FilePath 'java' -ArgumentList '-jar', '\"${jarFile}\"' -WorkingDirectory 'backend with eclipse\\catalogue-service\\target\\' -WindowStyle Hidden 
-                    """)
+                    // Run the .bat file
+                    bat "run_catalogue_service.bat"
                 }
             }
         }
