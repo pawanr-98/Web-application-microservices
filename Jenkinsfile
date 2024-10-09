@@ -43,9 +43,8 @@ pipeline {
                     // Create a .bat file dynamically to run the .jar file
                     writeFile file: 'run_catalogue_service.bat', text: """
                         @echo off
-                        set JAR_PATH="${jarFile}"
-                        start /B java -jar %JAR_PATH%
-                        exit
+                        set JAR_PATH="${jarFile}" >> service_log.txt
+                        start /B java -jar %JAR_PATH% >> service_log.txt 2>&1
                     """
 
                     // Run the .bat file
