@@ -44,7 +44,7 @@ pipeline {
                     writeFile file: 'run_catalogue_service.bat', text: """
                         @echo off
                         set JAR_PATH="${jarFile}"
-                        start java -jar %JAR_PATH%
+                        start /B java -jar %JAR_PATH%
                         exit
                     """
 
