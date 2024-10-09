@@ -43,7 +43,7 @@ pipeline {
 
                     // Use PowerShell to run the Java command with the .jar file path
                     powershell(script: """
-                       Start-Process -FilePath 'java' -ArgumentList '-jar', '\"${jarFile}\"' -NoNewWindow -PassThru | Out-Null
+                       Start-Process -FilePath 'java' -ArgumentList '-jar', '${jarFile}' -NoNewWindow -PassThru | Out-Null 
                     """)
                 }
             }
