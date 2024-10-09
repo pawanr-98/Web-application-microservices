@@ -48,7 +48,7 @@ pipeline {
                     """
 
                     // Run the .bat file
-                    bat "run_catalogue_service.bat"
+                    bat "run_catalogue_service.bat" >> service_log.txt 2>&1
                 }
             }
         }
