@@ -44,11 +44,11 @@ pipeline {
                     writeFile file: 'run_catalogue_service.bat', text: """
                         @echo off
                         set JAR_PATH="${jarFile}" >> service_log.txt
-                        start /B java -jar %JAR_PATH% >> service_log.txt 2>&1
+                        start /B java -jar %JAR_PATH% >> service_log.txt 2>&
                     """
 
                     // Run the .bat file
-                    bat "run_catalogue_service.bat" >> service_log.txt 2>&1
+                    bat "run_catalogue_service.bat"
                 }
             }
         }
