@@ -39,16 +39,15 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    
                     // Create a .bat file dynamically to run the .jar file
                     writeFile file: 'run_catalogue_service.bat', text: """
-                        @echo off
-                        set JAR_PATH="${jarFile}" >> service_log.txt
-                        start /B javaw -jar %JAR_PATH% >> service_log.txt 2>&
+                         @echo off
+                        set JAR_PATH="${jarFile}"
+                        start /B javaw -jar %JAR_PATH%
                     """
-
+        
                     // Run the .bat file
-                    bat "run_catalogue_service.bat" 
+                    bat "run_catalogue_service.bat"
                 }
             }
         }
