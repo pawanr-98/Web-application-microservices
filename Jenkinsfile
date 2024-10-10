@@ -47,7 +47,7 @@ pipeline {
                     bat "nssm remove ${serviceName} confirm"
                     // Install the new service
                     bat "nssm install ${serviceName} java -jar \"${jarFile}\""
-                    bat "nssm start ${serviceName} 
+                    bat "nssm start ${serviceName}"
                 }
             }
         }
