@@ -39,7 +39,7 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    bat "java -jar ${jarFile}"   
+                    bat "java -jar $\"{jarFile}\""   
                 }
             }
         }
