@@ -39,11 +39,15 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    bat "nssm stop catalogue-service"
-                    bat "nssm remove catalogue-service confirm"
-                    // Install the service with nssm
-                    bat "nssm install catalogue-service java -jar \"${jarFile}\""
-                    bat "nssm start catalogue-service" 
+                    // Define a service name based on the jar file's directory
+                    def serviceName = jarFile.split('\\').reverse()[2]  // Assuming directory structure
+
+                    // Stop and remove any existing service with the same name
+                    bat "nssm stop ${serviceName}"
+                    bat "nssm remove ${serviceName} confirm"
+                    // Install the new service
+                    bat "nssm install ${serviceName} java -jar \"${jarFile}\""
+                    bat "nssm start ${serviceName} 
                 }
             }
         }
