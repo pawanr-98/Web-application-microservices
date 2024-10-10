@@ -40,14 +40,16 @@ pipeline {
 
                     echo "Deploying ${jarFile}"
                     // Define a service name based on the jar file's directory
-                    def serviceName = jarFile.split('\\').reverse()[2]  // Assuming directory structure
+                    // Use a different method to extract the service name
+                        def parts = jarFile.split('\\\\')
+                        def serviceName = parts[parts.length - 3] // Assuming the service name is two directories up from the jar file
 
                     // Stop and remove any existing service with the same name
-                    bat "nssm stop ${serviceName}"
-                    bat "nssm remove ${serviceName} confirm"
+                        bat "nssm stop ${serviceName}"
+                        bat "nssm remove ${serviceName} confirm"
                     // Install the new service
-                    bat "nssm install ${serviceName} java -jar \"${jarFile}\""
-                    bat "nssm start ${serviceName}"
+                        bat "nssm install ${serviceName} java -jar \"${jarFile}\""
+                        bat "nssm start ${serviceName}"
                 }
             }
         }
