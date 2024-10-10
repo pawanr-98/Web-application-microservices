@@ -39,7 +39,11 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    bat "java -jar \"${jarFile}\""   
+                    bat "nssm stop catalogue-service"
+                    bat "nssm remove catalogue-service confirm"
+                    // Install the service with nssm
+                    bat "nssm install catalogue-service java -jar \"${jarFile}\""
+                    bat "nssm start catalogue-service" 
                 }
             }
         }
