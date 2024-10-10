@@ -39,7 +39,7 @@ pipeline {
                     ''', returnStdout: true).trim()
 
                     echo "Deploying ${jarFile}"
-                    bat "start /B javaw -jar ${jarFile}"    
+                    bat "start cmd /c javaw -jar ${jarFile}"   
                 }
             }
         }
